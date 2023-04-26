@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        #table {
+
+            border: solid 1px;
+        }
+
+        table,
+        td {
+            padding: 3px;
+            margin: 3px;
+            border: 1px solid black;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <table id='table'>
+        <tr>
+            <th>Fiat</th>
+            <th>Binance</th>
+            <th>Houbi</th>
+            <th>Coinbase</th>
+            <th>Bithub</th>
+        </tr>
+        <tr>
+            <td>BTC/USD</td>
+            <td id="price_0.0"></td>
+            <td id="price_0.1"></td>
+            <td id="price_0.2"></td>
+            <td id="price_0.3"></td>
+        </tr>
+        <tr>
+            <td>ETH/USD</td>
+            <td id="price_1.0"></td>
+            <td id="price_1.1"></td>
+            <td id="price_1.2"></td>
+            <td id="price_1.3"></td>
+
+        </tr>
+        <tr>
+            <td>BNB/USD</td>
+            <td id="price_2.0"></td>
+            <td id="price_2.1"></td>
+            <td id="price_2.2"></td>
+            <td id="price_2.3"></td>
+
+        </tr>
+        <tr>
+            <td>XRP/USD</td>
+            <td id="price_3.0"></td>
+            <td id="price_3.1"></td>
+            <td id="price_3.2"></td>
+            <td id="price_3.3"></td>
+
+        </tr>
+
+        <tr>
+            <td>ADA/USD</td>
+            <td id="price_4.0"></td>
+            <td id="price_4.1"></td>
+        </tr>
+        <tr>
+            <td>DOGE/USD</td>
+            <td id="price_5.0"></td>
+            <td id="price_5.1"></td>
+        </tr>
+        <tr>
+            <td>MATIC/USD</td>
+            <td id="price_6.0"></td>
+            <td id="price_6.1"></td>
+        </tr>
+        <tr>
+            <td>SOL/USD</td>
+            <td id="price_7.0"></td>
+            <td id="price_7.1"></td>
+        </tr>
+        <tr>
+            <td>DOT/USD</td>
+            <td id="price_8.0"></td>
+            <td id="price_8.1"></td>
+        </tr>
+
+
+    </table>
+
+    <script type="module">
+        import _ from 'https://cdn.skypack.dev/lodash';
+
+
+
+        const ex = [
+            ['BINANCE', 'price',
+                ["https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=BNBUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=XRPUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=DOGEUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=MATICUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=SOLUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=DOTUSDT",]
+            ],
+            ['HUOBI', 'tick.close',
+                ["https://api.huobi.pro/market/detail/merged?symbol=btcusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=ethusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=bnbusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=xrpusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=adausdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=dogeusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=maticusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=solusdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=dotusdt",]
+            ],
+            ['coinbase', "data.amount",
+                ['https://api.coinbase.com/v2/prices/BTC-USD/spot',
+                    'https://api.coinbase.com/v2/prices/ETH-USD/spot',
+                    'https://api.coinbase.com/v2/prices/BNB-USD/spot',
+                    'https://api.coinbase.com/v2/prices/XRP-USD/spot']
+            ],
+            ['Bithub', "data.closing_price",
+                ['https://api.bithumb.com/public/ticker/BTC',
+                    'https://api.bithumb.com/public/ticker/ETH',
+                    'https://api.bithumb.com/public/ticker/BNB',
+                    'https://api.bithumb.com/public/ticker/XRP']
+            ]
+        ]
+
+        const table = document.getElementById('table')
+
+        exch()
+        setInterval(exch, 1000)
+
+
+        /* for (let i = 0; i < ex.length; i++) {
+             // console.log(ex[i][0])
+             for (let j = 0; j < ex[i][2].length; j++) {
+                 //console.log(i,j)
+                 // console.log(ex[i][1])
+                 //console.log(ex[i][2][j])
+             }
+         }*/
+        function exch() {
+            for (let i = 0; i < ex.length; i++) {
+                for (let j = 0; j < ex[i][2].length; j++) {
+
+
+                    fetch(ex[i][2][j])
+                        .then(response => response.json()
+                            //console.log(response)
+                            //return
+
+                        )
+                        .then(data => {
+                            //console.log(data)
+                            const price = Number(_.get(data, ex[i][1])).toFixed(4)
+                            //console.log(price)
+                            const priceContainer = document.getElementById("price_" + [j]+ '.' + [i]);
+                            priceContainer.innerText = `${price}`;
+                        });
+
+                }
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
