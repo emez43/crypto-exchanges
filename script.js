@@ -1,4 +1,6 @@
 
+
+
 const ex = [
     ['BINANCE', 'price',
         ["https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT",
@@ -42,22 +44,24 @@ exch()
 setInterval(exch, 1000)
 
 
-/* for (let i = 0; i < ex.length; i++) {
-     // console.log(ex[i][0])
+ for (let i = 0; i < ex.length; i++) {
+      console.log(ex[i][0])
      for (let j = 0; j < ex[i][2].length; j++) {
          //console.log(i,j)
          // console.log(ex[i][1])
          //console.log(ex[i][2][j])
      }
- }*/
+ }
 function exch() {
     for (let i = 0; i < ex.length; i++) {
         for (let j = 0; j < ex[i][2].length; j++) {
 
             fetch(ex[i][2][j])
-                .then(response => response.json()
-                    //console.log(response)
+                .then(response => {
+                    return  response.json() 
+                console.log(response)
                     //return
+                }
                 )
                 .then(data => {
                     //console.log(data)
@@ -69,3 +73,27 @@ function exch() {
         }
     }
 }
+
+/*
+//async/await
+function exch() {
+    for (let i = 0; i < ex.length; i++) {
+        for (let j = 0; j < ex[i][2].length; j++) {
+            getData()
+        }}}
+
+async function getData() {
+    try {
+        const response = await fetch(ex[i][2][j])
+        const data = await response.json()
+        //console.log(data)
+        const price = Number(_.get(data, ex[i][1])).toFixed(4)
+        //console.log(price)
+        const priceContainer = document.getElementById("price_" + [j] + '.' + [i]);
+        priceContainer.innerText = `${price}`;
+
+    } catch (error) {
+        console.error(error);
+    }
+}*/
+
