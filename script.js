@@ -1,5 +1,5 @@
 
-
+/*
 
 const ex = [
     ['BINANCE', 'price',
@@ -95,7 +95,7 @@ function exch() {
     }
 }
 
-/*
+
 //async/await
 function exch() {
     for (let i = 0; i < ex.length; i++) {
