@@ -19,6 +19,7 @@
             <th>Houbi</th>
             <th>Coinbase</th>
             <th>Bithub</th>
+            <th>Bisq</th>
         </tr>
         <tr>
             <td>BTC/USD</td>
@@ -26,6 +27,7 @@
             <td id="price_0.1"></td>
             <td id="price_0.2"></td>
             <td id="price_0.3"></td>
+            <td id="price_0.4"></td>
         </tr>
         <tr>
             <td>ETH/USD</td>
@@ -33,7 +35,7 @@
             <td id="price_1.1"></td>
             <td id="price_1.2"></td>
             <td id="price_1.3"></td>
-
+            <td id="price_1.4"></td>
         </tr>
         <tr>
             <td>BNB/USD</td>
@@ -41,6 +43,7 @@
             <td id="price_2.1"></td>
             <td id="price_2.2"></td>
             <td id="price_2.3"></td>
+            <td id="price_2.4"></td>
 
         </tr>
         <tr>
@@ -49,6 +52,7 @@
             <td id="price_3.1"></td>
             <td id="price_3.2"></td>
             <td id="price_3.3"></td>
+            <td id="price_3.4"></td>
 
         </tr>
 
@@ -72,65 +76,65 @@
             <td id="price_7.0"></td>
             <td id="price_7.1"></td>
         </tr>
-        <tr>
+         <tr>
             <td>DOT/USD</td>
+            <td id="price_8.0"></td>
+            <td id="price_8.1"></td>
+        </tr>
+        <tr>
+            <td>LTC/USD</td>
             <td id="price_9.0"></td>
             <td id="price_9.1"></td>
         </tr>
         <tr>
-            <td>LTC/USD</td>
+            <td>TRX/USD</td>
             <td id="price_10.0"></td>
             <td id="price_10.1"></td>
         </tr>
         <tr>
-            <td>TRX/USD</td>
+            <td>SHIB/USD</td>
             <td id="price_11.0"></td>
             <td id="price_11.1"></td>
         </tr>
         <tr>
-            <td>SHIB/USD</td>
+            <td>AVAX/USD</td>
             <td id="price_12.0"></td>
             <td id="price_12.1"></td>
         </tr>
         <tr>
-            <td>AVAX/USD</td>
+            <td>DAI/USD</td>
             <td id="price_13.0"></td>
             <td id="price_13.1"></td>
         </tr>
         <tr>
-            <td>DAI/USD</td>
+            <td>WBTC/USD</td>
             <td id="price_14.0"></td>
             <td id="price_14.1"></td>
         </tr>
         <tr>
-            <td>WBTC/USD</td>
+            <td>LINK/USD</td>
             <td id="price_15.0"></td>
             <td id="price_15.1"></td>
         </tr>
         <tr>
-            <td>LNIK/USD</td>
+            <td>ATOM/USD</td>
             <td id="price_16.0"></td>
             <td id="price_16.1"></td>
         </tr>
         <tr>
-            <td>ATOM/USD</td>
+            <td>XLM/USD</td>
             <td id="price_17.0"></td>
             <td id="price_17.1"></td>
         </tr>
         <tr>
-            <td>LEO/USD</td>
+            <td>UNI/USD</td>
             <td id="price_18.0"></td>
             <td id="price_18.1"></td>
         </tr>
         <tr>
-            <td>UNI/USD</td>
+            <td>XMR/USD</td>
             <td id="price_19.0"></td>
             <td id="price_19.1"></td>
-        </tr>
-        <tr>
-            <td>OKB/USD</td>
-            <td id="price_20.0"></td>
-            <td id="price_20.1"></td>
         </tr>
 
     </table>
@@ -159,9 +163,10 @@
                     "https://api.binance.com/api/v3/ticker/price?symbol=WBTCUSDT",
                     "https://api.binance.com/api/v3/ticker/price?symbol=LINKUSDT",
                     "https://api.binance.com/api/v3/ticker/price?symbol=ATOMUSDT",
-                    "https://api.binance.com/api/v3/ticker/price?symbol=LEOUSDT",
+                    "https://api.binance.com/api/v3/ticker/price?symbol=XLMUSDT",
                     "https://api.binance.com/api/v3/ticker/price?symbol=UNIUSDT",
-                    "https://api.binance.com/api/v3/ticker/price?symbol=OKBUSDT",]
+                    "https://api.binance.com/api/v3/ticker/price?symbol=XMRUSDT",
+                ]
             ],
             ['HUOBI', 'tick.close',
                 ["https://api.huobi.pro/market/detail/merged?symbol=btcusdt",
@@ -181,9 +186,10 @@
                     "https://api.huobi.pro/market/detail/merged?symbol=wbtcusdt",
                     "https://api.huobi.pro/market/detail/merged?symbol=linkusdt",
                     "https://api.huobi.pro/market/detail/merged?symbol=atomusdt",
-                    "https://api.huobi.pro/market/detail/merged?symbol=leousdt",
+                    "https://api.huobi.pro/market/detail/merged?symbol=xlmusdt",
                     "https://api.huobi.pro/market/detail/merged?symbol=uniusdt",
-                    "https://api.huobi.pro/market/detail/merged?symbol=okbusdt",]
+                   "https://api.huobi.pro/market/detail/merged?symbol=xmrusdt",
+                ]
             ],
             ['coinbase', "data.amount",
                 ['https://api.coinbase.com/v2/prices/BTC-USD/spot',
@@ -196,6 +202,12 @@
                     'https://api.bithumb.com/public/ticker/ETH',
                     'https://api.bithumb.com/public/ticker/BNB',
                     'https://api.bithumb.com/public/ticker/XRP']
+            ],
+             ['Bisq', "last",
+                ['https://bisq.markets/api/ticker?market=BTC_USD',
+                    'https://bisq.markets/api/ticker?market=ETH_USD',
+                    'https://bisq.markets/api/ticker?market=BTC_USD',
+                    'https://bisq.markets/api/ticker?market=XMR_USD']
             ]
         ]
 
@@ -232,7 +244,8 @@
                             //console.log(price)
                             const priceContainer = document.getElementById("price_" + [j] + '.' + [i]);
                             priceContainer.innerText = `${price}`;
-                        });
+                        })
+                        //.catch(error => console.log(error))
                 }
             }
         }
@@ -261,6 +274,15 @@
         }
     }}}*/
 
+    fetch('https://bisq.markets/api/ticker?market=BTC_USD')
+  .then(response => response.json())
+  .then(data => {
+    const btcUsdPrice = data.last;
+    console.log(`A jelenlegi Bitcoin-USD árfolyam: ${btcUsdPrice}`);
+  })
+  .catch(error => {
+    console.error('Hiba történt a lekérdezés során:', error);
+  });
 
 
     </script>
